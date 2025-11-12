@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <title>Recipes</title>
+    <!-- Favicon-->
+    <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+    <!-- Core theme CSS (includes Bootstrap)-->
+    <link href="css/styles.css" rel="stylesheet" />
+</head>
+
+<body>
+    <div class="d-flex" id="wrapper">
+        <!-- Sidebar-->
+        <div class="border-end bg-white" id="sidebar-wrapper">
+            <div class="list-group list-group-flush">
+                <a class="list-group-item list-group-item-action list-group-item-light p-3"
+                    href="#recipeDataTable">Recipes</a>
+            </div>
+        </div>
+        <!-- Page content wrapper-->
+        <div id="page-content-wrapper">
+
+            <!-- Top navigation-->
+            <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
+                <div class="container-fluid">
+                    <button class="" id="sidebarToggle">
+                        <img src="assets/menu.png" style="width: 25px; height: 25px;">
+                    </button>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation"><span
+                            class="navbar-toggler-icon"></span></button>
+
+                </div>
+            </nav>
+            <!-- Page content-->
+            <div class="container-fluid p-4">
+                <h1 class="mt-4">My Recipes</h1>
+                <p>Welcome to the Recipe Management App! Here, you can easily manage your favorite recipes. You can</p>
+                <ul>
+                    <li>view all recipes in a clear table format</li>
+                    <li>filter recipes by category (Breakfast, Lunch, Dinner)</li>
+                    <li>view your recipe in modal format!</li>
+                    <li>add new recipes</li>
+                    <li>delete bad recipes</li>
+                    <li>update old recipes</li>
+                    <li>view your recipe in modal format!</li>
+                </ul>
+
+                <p>With all these features, managing your recipes has never been easier. Enjoy!</p>
+                <form class="d-flex align-items-center gap-2 mb-3">
+                    <input class="form-control me-sm-2" type="search" placeholder="Search" spellcheck="false"
+                        id="searchKey" style="max-width: 300px; border-radius: 5px; padding: 8px;">
+
+
+                    <select id="categoryDropdown" class="form-control"
+                        style="max-width: 150px; border-radius: 5px; padding: 8px;">
+                        <option value="">All Categories</option>
+                        <option value="Breakfast">Breakfast</option>
+                        <option value="Lunch">Lunch</option>
+                        <option value="Dinner">Dinner</option>
+                    </select>
+
+                    <div class="btn-group" role="group" aria-label="Recipe Actions">
+                        <button class="btn btn-outline-primary" type="submit" id="btnSearch">Search</button>
+                        <button class="btn btn-outline-secondary" type="submit" id="btnShowAll">Show All</button>
+                        <button class="btn btn-outline-success" type="submit" id="btnAdd">Add New</button>
+
+                    </div>
+                </form>
+            </div>
+
+
+            <div id="recipeDataTable" class="table">
+                <table id="recipeTable" class="table-success table-responsive">
+                    <tr>
+                        <th>name</th>
+                        <th>author</th>
+                        <th>time</th>
+                        <th>servings</th>
+                        <th>ingredients</th>
+                        <th>instructions</th>
+                        <th>picture</th>
+                        <th>category</th>
+                        <th>edit</th>
+                        <th>delete</th>
+                    </tr>
+
+
+                </table>
+            </div>
+
+            <div class="modal" id="viewModal">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Modal title</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true"></span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <p><strong>Author:</strong> <span id="modalRecipeAuthor"></span></p>
+                            <p><strong>Time:</strong> <span id="modalRecipeTime"></span></p>
+                            <p><strong>Servings:</strong> <span id="modalRecipeServings"></span></p>
+                            <ol><strong>Ingredients:</strong><span id="modalRecipeIngredients"></span></ol>
+                            <ol><strong>Instructions:</strong><span id="modalRecipeInstructions"></span></ol>
+                            <p><strong>Category:</strong> <span id="modalRecipeCategory"></span></p>
+                            <img id="modalRecipeImage" src="" alt="Recipe Image" style="max-width: 100%; height: auto;">
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="modal fade" id="formModal" tabindex="-1" role="dialog" aria-labelledby="formModalTitle"
+                aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="formModalTitle">Create New Recipe</h5>
+                            <button id="btnX" type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+
+
+                        <div class="modal-body">
+                            <form id="recipeForm">
+                                <div class="form-group">
+                                    <label for="recipeName">Recipe Name</label>
+                                    <input type="text" class="form-control" id="recipeName"
+                                        placeholder="Enter recipe name" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="recipeUrl">Recipe Url</label>
+                                    <input type="url" class="form-control" id="recipeUrl" placeholder="Enter recipe url"
+                                        required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="author">Author</label>
+                                    <input type="text" class="form-control" id="author"
+                                        placeholder="Enter author's name" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="time">Cooking Time</label>
+                                    <input type="text" class="form-control" id="time" placeholder="Enter cooking time"
+                                        required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="servings">Servings</label>
+                                    <input type="text" class="form-control" id="servings"
+                                        placeholder="Enter number of servings" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="ingredients">Ingredients</label>
+                                    <textarea class="form-control" id="ingredients" rows="3"
+                                        placeholder="Enter ingredients, split each step with a comma (,)!" required></textarea>
+                                </div>
+                                <div class="form-group">
+                                    <label for="instructions">Instructions</label>
+                                    <textarea class="form-control" id="instructions" rows="3"
+                                        placeholder="Enter cooking instructions, split each step with a period (.)!" required></textarea>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="picture">Image URL</label>
+                                    <input type="url" class="form-control" id="picture" placeholder="Enter image URL"
+                                        required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="category">Category</label>
+                                    <select class="form-control" id="category" required>
+                                        <option value="">Select a category</option>
+                                        <option value="Breakfast">Breakfast</option>
+                                        <option value="Lunch">Lunch</option>
+                                        <option value="Dinner">Dinner</option>
+                                        <option value="Dessert">Dessert</option>
+                                    </select>
+                                </div>
+                                <input type="hidden" id="recipeId" />
+
+                                <button type="submit" class="btn btn-primary m-2">Save Recipe</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+
+        </div><!--page content-->
+
+
+    </div> <!--ending-->
+    <!-- Bootstrap core JS-->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Core theme JS-->
+    <script src="js/jquery-1.8.3.js"></script>
+    <script src="js/scripts.js"></script>
+
+
+</body>
+
+</html>
